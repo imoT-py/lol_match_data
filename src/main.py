@@ -9,6 +9,7 @@ from user_rank import user_rank
 # Create folders based on ranks
 folders()
 
+'''
 #Get the user_IDs in a list | Below DIAMOND
 puuids, rank = get_puuids()
 process(puuids, 30, rank)
@@ -27,3 +28,4 @@ process(puuids, 100, 'master')
 
 #Create user_rank folder with all users and their ranks
 user_rank()
+'''
