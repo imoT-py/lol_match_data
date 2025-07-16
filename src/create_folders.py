@@ -29,3 +29,13 @@ def folders():
             print(f"Permission denied: Unable to create '{specific_path}'.")
         except Exception as e:
             print(f"An error occured: {e}")
+
+    try:
+        f = open(str(data_path) + "/" + "users.txt", "x")
+        
+    except FileExistsError:
+            print(f"Directory 'users.txt' already exists.")
+    except PermissionError:
+            print(f"Permission denied: Unable to create 'users.txt'.")
+    except Exception as e:
+            print(f"An error occured: {e}")
