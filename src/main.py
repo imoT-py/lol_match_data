@@ -9,11 +9,11 @@ from user_rank import user_rank
 # Create folders based on ranks
 folders()
 
-'''
+
 #Get the user_IDs in a list | Below DIAMOND
 puuids, rank = get_puuids()
 process(puuids, 30, rank)
-'''
+
 
 #Get the Challengers
 puuids = get_puuids_challengers()
