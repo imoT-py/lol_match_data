@@ -8,6 +8,7 @@ def matches(user_id, match_count):
 
     while True:
         response = requests.get(f"https://europe.api.riotgames.com/lol/match/v5/matches/by-puuid/{user_id}/ids?count={match_count}", headers=headers) # 2000 requests every 10 seconds
+        print(response.status_code)
         if response.status_code == 200:
             break
         else:
