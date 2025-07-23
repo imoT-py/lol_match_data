@@ -19,7 +19,7 @@ def get_puuids():
                         break
                     else:
                         print("Waiting for API")
-                        time.sleep(20)
+                        time.sleep(60)
                         continue
 
                 data = response.json()
@@ -27,7 +27,7 @@ def get_puuids():
                 for user in data:
                     inner_data = user['puuid']
                     list_puuids.append(inner_data)
-        
+            time.sleep(5)
             return list_puuids, rank
         
 

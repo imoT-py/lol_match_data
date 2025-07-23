@@ -10,11 +10,12 @@ def patch_info(match_ID):
       break
     else:
       print(">>>Waiting for API")
-      time.sleep(20)
+      time.sleep(60)
       continue
 
   data = response.json()
   patch_info = data['info']['gameVersion']
 
+  time.sleep(5)
   return patch_info
 

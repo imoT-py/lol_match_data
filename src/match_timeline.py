@@ -16,9 +16,10 @@ def timeline(match_ID, rank):
             break
         else:
             print("Waiting for the API")
-            time.sleep(20)
+            time.sleep(60)
             continue
-
+        
+    time.sleep(5)        
     data = response.json()
 
     # get the list of frames

@@ -12,7 +12,7 @@ def matches(user_id, match_count):
             break
         else:
             print("Waiting for API")
-            time.sleep(20)
+            time.sleep(60)
             continue
     
     
@@ -20,5 +20,5 @@ def matches(user_id, match_count):
 
     for match in matches:
         list_matches.append(match)
-
+    time.sleep(5)
     return list_matches

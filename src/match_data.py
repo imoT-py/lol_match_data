@@ -10,11 +10,11 @@ def is_ranked(match_ID):
       break
     else:
       print("Waiting for API")
-      time.sleep(20)
+      time.sleep(60)
       continue
 
   data = response.json()
   ranked_info = data['info']['queueId']
-
+  time.sleep(5)
   return ranked_info
 
