@@ -15,12 +15,12 @@ def get_puuids():
 
                 while True:
                     response = requests.get(f"https://euw1.api.riotgames.com/lol/league/v4/entries/RANKED_SOLO_5x5/{rank}/{tier}?page={page}", headers=headers) # 50 requests every 10 seconds
-                    print(response.status_code)
+                    print(f"puuids, {rank}", response.status_code)
                     if response.status_code == 200:
                         break
                     else:
                         print("Waiting for API")
-                        time.sleep(60)
+                        time.sleep(30)
                         continue
 
                 data = response.json()
@@ -28,13 +28,13 @@ def get_puuids():
                 for user in data:
                     inner_data = user['puuid']
                     list_puuids.append(inner_data)
-            time.sleep(5)
+            time.sleep(2)
             return list_puuids, rank
         
 
 def get_puuids_challengers():       
     response = requests.get("https://euw1.api.riotgames.com/lol/league/v4/challengerleagues/by-queue/RANKED_SOLO_5x5", headers=headers)
-    print(response.status_code)
+    print("puuids chall", response.status_code)
     data = response.json()
     challengers = data['entries']
 
@@ -49,7 +49,7 @@ def get_puuids_challengers():
 
 def get_puuids_grandmasters():       
     response = requests.get("https://euw1.api.riotgames.com/lol/league/v4/grandmasterleagues/by-queue/RANKED_SOLO_5x5", headers=headers)
-    print(response.status_code)
+    print("puuids grand_master", response.status_code)
     data = response.json()
     grandmasters = data['entries']
 
@@ -65,7 +65,7 @@ def get_puuids_grandmasters():
 
 def get_puuids_masters():       
     response = requests.get("https://euw1.api.riotgames.com/lol/league/v4/masterleagues/by-queue/RANKED_SOLO_5x5", headers=headers)
-    print(response.status_code)
+    print("puuids master", response.status_code)
     data = response.json()
     masters = data['entries']
 

@@ -11,15 +11,15 @@ def timeline(match_ID, rank):
     # timeline of a specific match
     while True:
         response = requests.get(f"https://europe.api.riotgames.com/lol/match/v5/matches/{match_ID}/timeline", headers=headers)
-        print(response.status_code)
+        print("timeline", response.status_code)
         if response.status_code == 200:
             break
         else:
             print("Waiting for the API")
-            time.sleep(60)
+            time.sleep(30)
             continue
 
-    time.sleep(5)        
+    time.sleep(2)        
     data = response.json()
 
     # get the list of frames

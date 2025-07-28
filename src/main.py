@@ -14,17 +14,17 @@ folders()
 puuids, rank = get_puuids()
 process(puuids, 30, rank)
 
-time.sleep(5)
+time.sleep(2)
 #Get the Challengers
 puuids = get_puuids_challengers()
 process(puuids, 100, 'challenger')
 
-time.sleep(5)
+time.sleep(2)
 #Get the Grandmasters
 puuids = get_puuids_grandmasters()
 process(puuids, 100, 'grandmaster')
 
-time.sleep(5)
+time.sleep(2)
 #Get the Masters
 puuids = get_puuids_masters()
 process(puuids, 100, 'master')
