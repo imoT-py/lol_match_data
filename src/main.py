@@ -9,16 +9,16 @@ import time
 
 # Create folders based on ranks
 folders()
-
+'''
 #Get the user_IDs in a list | Below DIAMOND
 puuids, rank = get_puuids()
 process(puuids, 30, rank)
-
+'''
 time.sleep(2)
 #Get the Challengers
 puuids = get_puuids_challengers()
 process(puuids, 100, 'challenger')
-
+'''
 time.sleep(2)
 #Get the Grandmasters
 puuids = get_puuids_grandmasters()
@@ -31,3 +31,4 @@ process(puuids, 100, 'master')
 
 #Create user_rank folder with all users and their ranks
 user_rank()
+'''
