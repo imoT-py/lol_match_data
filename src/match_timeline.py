@@ -3,6 +3,7 @@ from patch_info import patch_info
 from api import headers
 import time
 from pathlib import Path
+from match_and_user_info import match_and_user_info
 
 def timeline(match_ID, rank):
 
@@ -27,7 +28,7 @@ def timeline(match_ID, rank):
     # get the list of participants
     participants = data['info']['participants']
     # get actual patch number
-    patch_data = patch_info(match_ID)
+    #patch_data = patch_info(match_ID)
 
     directory_path = Path(__file__).resolve().parent.parent
     data_path = directory_path / 'outputs'
@@ -42,7 +43,13 @@ def timeline(match_ID, rank):
                 print(match_ID, end=" ", file=f)
                 print(frame_num, end=" ", file=f)
                 print(participants[i-1]['puuid'], end=" ", file=f)
-                print(patch_data, end=" ", file=f)
+                #print(patch_data, end=" ", file=f)
+            
+                # Get teamId, lane, championName, win or lose
+                user_info = match_and_user_info(match_ID, participants[i-1]['puuid'])
+                for info in user_info:
+                    print(info, end=" ", file=f)
+
             # Get user_list to a different file '''
             with open(str(data_path) + "/" + "users.txt", "r") as users_file:
                 existing_users = set(users_file.read().splitlines())
