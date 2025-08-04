@@ -12,8 +12,10 @@ def timeline(match_ID, rank):
     # timeline of a specific match
     while True:
         response = requests.get(f"https://europe.api.riotgames.com/lol/match/v5/matches/{match_ID}/timeline", headers=headers)
+        response_info = requests.get(f"https://europe.api.riotgames.com/lol/match/v5/matches/{match_ID}", headers=headers)
         print("timeline", response.status_code)
-        if response.status_code == 200:
+        print("info", response_info.status_code)
+        if response.status_code == 200 and response_info.status_code == 200:
             break
         else:
             print("Waiting for the API")
@@ -22,6 +24,7 @@ def timeline(match_ID, rank):
 
     time.sleep(2)        
     data = response.json()
+    data_match_user_info = response_info.json()
 
     # get the list of frames
     outer_data = data['info']['frames']
@@ -46,9 +49,9 @@ def timeline(match_ID, rank):
                 #print(patch_data, end=" ", file=f)
             
                 # Get teamId, lane, championName, win or lose
-                user_info = match_and_user_info(match_ID, participants[i-1]['puuid'])
+                user_info = match_and_user_info(data_match_user_info, participants[i-1]['puuid'])
                 for info in user_info:
-                    print(info, end=" ", file=f)
+                    print(str(info), end=" ", file=f)
 
             # Get user_list to a different file '''
             with open(str(data_path) + "/" + "users.txt", "r") as users_file:

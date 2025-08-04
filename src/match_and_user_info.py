@@ -1,12 +1,10 @@
 import requests
 from api import headers
 
-def match_and_user_info(match_ID, user):
+def match_and_user_info(data_match_info, user):
 
-    response = requests.get(f"https://europe.api.riotgames.com/lol/match/v5/matches/{match_ID}", headers=headers) # 2000 requests every 10 seconds
-
-    data = response.json()
-    print("data", data)
+    data = data_match_info
+    #print("data", data)
     li = []
 
     for i in range(0, 10):
@@ -23,6 +21,7 @@ def match_and_user_info(match_ID, user):
                 if team_id == team:
                     li.append(data["info"]["teams"][j]['win'])
 
+    print(li)                
     return li
 
 
