@@ -20,8 +20,7 @@ def match_and_user_info(data_match_info, user):
                 team = data["info"]["teams"][j]['teamId']
                 if team_id == team:
                     li.append(data["info"]["teams"][j]['win'])
-
-    print(li)                
+                
     return li
 
 
