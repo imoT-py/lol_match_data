@@ -8,13 +8,29 @@ def user_rank():
             user = line.strip()
 
             while True:
-                response = requests.get(f"https://euw1.api.riotgames.com/lol/league/v4/entries/by-puuid/{user}", headers=headers) 
-                if response.status_code == 200:
+                try:
+                    response = requests.get(f"https://euw1.api.riotgames.com/lol/league/v4/entries/by-puuid/{user}", headers=headers) 
+                    print("user", response.status_code)
+
+                    if response.status_code == 429:
+                        print("Waiting for the API")
+                        time.sleep(30)
+                        continue
+            
                     break
-                else:
-                    print("Waiting for API")
-                    time.sleep(20)
-                    continue
+
+                except (IncompleteRead, ChunkedEncodingError, ConnectionError) as e:
+                    print('IncompleteRead, ChunkedEncodingError, ConnectionError')
+                    print(e)
+                    time.sleep(2)                
+
+                except HTTPError as e:
+                    print("HTTTPError", e)
+                    break
+        
+                except Exception as e:
+                    print("Exception", e)
+                    break
 
             data = response.json()
 

@@ -4,6 +4,8 @@ from api import headers
 import time
 from pathlib import Path
 from match_and_user_info import match_and_user_info
+from http.client import IncompleteRead
+from requests.exceptions import ChunkedEncodingError, ConnectionError, HTTPError
 
 def timeline(match_ID, rank):
 
@@ -11,16 +13,32 @@ def timeline(match_ID, rank):
 
     # timeline of a specific match
     while True:
-        response = requests.get(f"https://europe.api.riotgames.com/lol/match/v5/matches/{match_ID}/timeline", headers=headers)
-        response_info = requests.get(f"https://europe.api.riotgames.com/lol/match/v5/matches/{match_ID}", headers=headers)
-        print("timeline", response.status_code)
-        print("info", response_info.status_code)
-        if response.status_code == 200 and response_info.status_code == 200:
+        try:
+            response = requests.get(f"https://europe.api.riotgames.com/lol/match/v5/matches/{match_ID}/timeline", headers=headers)
+            response_info = requests.get(f"https://europe.api.riotgames.com/lol/match/v5/matches/{match_ID}", headers=headers)
+            print("timeline", response.status_code)
+            print("info", response_info.status_code)
+
+            if response.status_code == 429:
+                print("Waiting for the API")
+                time.sleep(30)
+                continue
+            
             break
-        else:
-            print("Waiting for the API")
-            time.sleep(30)
-            continue
+
+        except (IncompleteRead, ChunkedEncodingError, ConnectionError) as e:
+            print('IncompleteRead, ChunkedEncodingError, ConnectionError')
+            print(e)
+            time.sleep(2)                
+
+        except HTTPError as e:
+            print("HTTTPError", e)
+            break
+        
+        except Exception as e:
+            print("Exception", e)
+            break
+
 
     time.sleep(2)        
     data = response.json()
@@ -71,5 +89,5 @@ def timeline(match_ID, rank):
                         print(value, end=" ", file=f)
             with open(str(data_path) + "/" + rank.upper() + "/" + match_ID + ".txt", "a") as f:            
                 print(file=f)
-        with open(str(data_path) + "/" + rank.upper() + "/" + match_ID + ".txt", "a") as f:            
-                print(file=f)
+        #with open(str(data_path) + "/" + rank.upper() + "/" + match_ID + ".txt", "a") as f:            
+        #        print(file=f)
