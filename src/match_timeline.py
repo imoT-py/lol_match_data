@@ -19,7 +19,7 @@ def timeline(match_ID, rank):
             print("timeline", response.status_code)
             print("info", response_info.status_code)
 
-            if response.status_code == 429:
+            if response.status_code == 429 or response.status_code == 503:
                 print("Waiting for the API")
                 time.sleep(30)
                 continue

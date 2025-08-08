@@ -12,7 +12,7 @@ def user_rank():
                     response = requests.get(f"https://euw1.api.riotgames.com/lol/league/v4/entries/by-puuid/{user}", headers=headers) 
                     print("user", response.status_code)
 
-                    if response.status_code == 429:
+                    if response.status_code == 429 or response.status_code == 503:
                         print("Waiting for the API")
                         time.sleep(30)
                         continue
