@@ -24,6 +24,11 @@ def timeline(match_ID, rank):
                 time.sleep(30)
                 continue
             
+            if response_info.status_code == 429 or response_info.status_code == 503:
+                print("Waiting for the API")
+                time.sleep(30)
+                continue
+            
             break
 
         except (IncompleteRead, ChunkedEncodingError, ConnectionError) as e:

@@ -1,6 +1,8 @@
 import requests
 from api import headers
 import time
+from http.client import IncompleteRead
+from requests.exceptions import ChunkedEncodingError, ConnectionError, HTTPError
 
 def get_puuids():
 
@@ -14,14 +16,29 @@ def get_puuids():
             for page in range(1, 51):
 
                 while True:
-                    response = requests.get(f"https://euw1.api.riotgames.com/lol/league/v4/entries/RANKED_SOLO_5x5/{rank}/{tier}?page={page}", headers=headers) # 50 requests every 10 seconds
-                    print(f"puuids, {rank}", response.status_code)
-                    if response.status_code == 200:
+                    try:
+                        response = requests.get(f"https://euw1.api.riotgames.com/lol/league/v4/entries/RANKED_SOLO_5x5/{rank}/{tier}?page={page}", headers=headers) # 50 requests every 10 seconds
+                        print(f"puuids, {rank}", response.status_code)
+
+                        if response.status_code == 429 or response.status_code == 503:
+                            print("Waiting for the API")
+                            time.sleep(30)
+                            continue
+                
                         break
-                    else:
-                        print("Waiting for API")
-                        time.sleep(30)
-                        continue
+
+                    except (IncompleteRead, ChunkedEncodingError, ConnectionError) as e:
+                        print('IncompleteRead, ChunkedEncodingError, ConnectionError')
+                        print(e)
+                        time.sleep(2)                
+
+                    except HTTPError as e:
+                        print("HTTTPError", e)
+                        break
+                    
+                    except Exception as e:
+                        print("Exception", e)
+                        break
 
                 data = response.json()
                 # Get user IDs
@@ -32,9 +49,32 @@ def get_puuids():
             return list_puuids, rank
         
 
-def get_puuids_challengers():       
-    response = requests.get("https://euw1.api.riotgames.com/lol/league/v4/challengerleagues/by-queue/RANKED_SOLO_5x5", headers=headers)
-    print("puuids chall", response.status_code)
+def get_puuids_challengers():    
+    while True:
+        try:   
+            response = requests.get("https://euw1.api.riotgames.com/lol/league/v4/challengerleagues/by-queue/RANKED_SOLO_5x5", headers=headers)
+            print("puuids chall", response.status_code)
+            
+            if response.status_code == 429 or response.status_code == 503:
+                print("Waiting for the API")
+                time.sleep(30)
+                continue
+            
+            break
+
+        except (IncompleteRead, ChunkedEncodingError, ConnectionError) as e:
+            print('IncompleteRead, ChunkedEncodingError, ConnectionError')
+            print(e)
+            time.sleep(2)                
+
+        except HTTPError as e:
+            print("HTTTPError", e)
+            break
+        
+        except Exception as e:
+            print("Exception", e)
+            break
+             
     data = response.json()
     challengers = data['entries']
 
@@ -43,13 +83,36 @@ def get_puuids_challengers():
     for challenger in challengers:
         puuid_data = challenger['puuid']
         list_puuids.append(puuid_data)
-    
+            
     return list_puuids
 
 
-def get_puuids_grandmasters():       
-    response = requests.get("https://euw1.api.riotgames.com/lol/league/v4/grandmasterleagues/by-queue/RANKED_SOLO_5x5", headers=headers)
-    print("puuids grand_master", response.status_code)
+def get_puuids_grandmasters():  
+    while True:
+        try:       
+            response = requests.get("https://euw1.api.riotgames.com/lol/league/v4/grandmasterleagues/by-queue/RANKED_SOLO_5x5", headers=headers)
+            print("puuids grand_master", response.status_code)
+        
+            if response.status_code == 429 or response.status_code == 503:
+                    print("Waiting for the API")
+                    time.sleep(30)
+                    continue
+            
+            break
+
+        except (IncompleteRead, ChunkedEncodingError, ConnectionError) as e:
+            print('IncompleteRead, ChunkedEncodingError, ConnectionError')
+            print(e)
+            time.sleep(2)                
+
+        except HTTPError as e:
+            print("HTTTPError", e)
+            break
+        
+        except Exception as e:
+            print("Exception", e)
+            break
+        
     data = response.json()
     grandmasters = data['entries']
 
@@ -63,9 +126,32 @@ def get_puuids_grandmasters():
 
 
 
-def get_puuids_masters():       
-    response = requests.get("https://euw1.api.riotgames.com/lol/league/v4/masterleagues/by-queue/RANKED_SOLO_5x5", headers=headers)
-    print("puuids master", response.status_code)
+def get_puuids_masters():     
+    while True:
+        try:   
+            response = requests.get("https://euw1.api.riotgames.com/lol/league/v4/masterleagues/by-queue/RANKED_SOLO_5x5", headers=headers)
+            print("puuids master", response.status_code)
+            
+            if response.status_code == 429 or response.status_code == 503:
+                            print("Waiting for the API")
+                            time.sleep(30)
+                            continue
+            
+            break
+
+        except (IncompleteRead, ChunkedEncodingError, ConnectionError) as e:
+            print('IncompleteRead, ChunkedEncodingError, ConnectionError')
+            print(e)
+            time.sleep(2)                
+
+        except HTTPError as e:
+            print("HTTTPError", e)
+            break
+        
+        except Exception as e:
+            print("Exception", e)
+            break       
+            
     data = response.json()
     masters = data['entries']
 
