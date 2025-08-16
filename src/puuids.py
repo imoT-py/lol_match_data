@@ -20,7 +20,7 @@ def get_puuids():
                         response = requests.get(f"https://euw1.api.riotgames.com/lol/league/v4/entries/RANKED_SOLO_5x5/{rank}/{tier}?page={page}", headers=headers) # 50 requests every 10 seconds
                         print(f"puuids, {rank}", response.status_code)
 
-                        if response.status_code == 429 or response.status_code == 503:
+                        if response.status_code == 429 or response.status_code == 503 or response.status_code == 504:
                             print("Waiting for the API")
                             time.sleep(30)
                             continue
@@ -55,7 +55,7 @@ def get_puuids_challengers():
             response = requests.get("https://euw1.api.riotgames.com/lol/league/v4/challengerleagues/by-queue/RANKED_SOLO_5x5", headers=headers)
             print("puuids chall", response.status_code)
             
-            if response.status_code == 429 or response.status_code == 503:
+            if response.status_code == 429 or response.status_code == 503 or response.status_code == 504:
                 print("Waiting for the API")
                 time.sleep(30)
                 continue
@@ -93,7 +93,7 @@ def get_puuids_grandmasters():
             response = requests.get("https://euw1.api.riotgames.com/lol/league/v4/grandmasterleagues/by-queue/RANKED_SOLO_5x5", headers=headers)
             print("puuids grand_master", response.status_code)
         
-            if response.status_code == 429 or response.status_code == 503:
+            if response.status_code == 429 or response.status_code == 503 or response.status_code == 504:
                     print("Waiting for the API")
                     time.sleep(30)
                     continue
@@ -132,7 +132,7 @@ def get_puuids_masters():
             response = requests.get("https://euw1.api.riotgames.com/lol/league/v4/masterleagues/by-queue/RANKED_SOLO_5x5", headers=headers)
             print("puuids master", response.status_code)
             
-            if response.status_code == 429 or response.status_code == 503:
+            if response.status_code == 429 or response.status_code == 503 or response.status_code == 504:
                             print("Waiting for the API")
                             time.sleep(30)
                             continue
