@@ -6,43 +6,18 @@ from pathlib import Path
 from match_and_user_info import match_and_user_info
 from http.client import IncompleteRead
 from requests.exceptions import ChunkedEncodingError, ConnectionError, HTTPError
+from responses import response_match
+from responses import response_timeline
 
 def timeline(match_ID, rank):
 
     frame_num = 0
 
     # timeline of a specific match
-    while True:
-        try:
-            response = requests.get(f"https://europe.api.riotgames.com/lol/match/v5/matches/{match_ID}/timeline", headers=headers)
-            response_info = requests.get(f"https://europe.api.riotgames.com/lol/match/v5/matches/{match_ID}", headers=headers)
-            print("timeline", response.status_code)
-            print("info", response_info.status_code)
+    
+    response = response_timeline(match_ID)
+    response_info = response_match(match_ID)
 
-            if response.status_code == 429 or response.status_code == 503 or response.status_code == 504:
-                print("Waiting for the API")
-                time.sleep(30)
-                continue
-            
-            if response_info.status_code == 429 or response_info.status_code == 503 or response_info.status_code == 504:
-                print("Waiting for the API")
-                time.sleep(30)
-                continue
-            
-            break
-
-        except (IncompleteRead, ChunkedEncodingError, ConnectionError) as e:
-            print('IncompleteRead, ChunkedEncodingError, ConnectionError')
-            print(e)
-            time.sleep(2)                
-
-        except HTTPError as e:
-            print("HTTTPError", e)
-            break
-        
-        except Exception as e:
-            print("Exception", e)
-            break
 
 
     time.sleep(2)        
