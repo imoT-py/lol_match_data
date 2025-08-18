@@ -217,7 +217,7 @@ def response_user(user):
         except (IncompleteRead, ChunkedEncodingError, ConnectionError) as e:
             print('IncompleteRead, ChunkedEncodingError, ConnectionError')
             print(e)
-            break               
+                          
 
         except HTTPError as e:
             print("HTTTPError", e)
