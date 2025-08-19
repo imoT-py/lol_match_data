@@ -21,15 +21,19 @@ def response_match(match_ID):
         except (IncompleteRead, ChunkedEncodingError, ConnectionError) as e:
             print('IncompleteRead, ChunkedEncodingError, ConnectionError')
             print(e)
-            break               
+            print("IncompleteRead")
+            time.sleep(30)
+            continue               
 
         except HTTPError as e:
             print("HTTTPError", e)
-            break
+            time.sleep(30)
+            continue
             
         except Exception as e:
             print("Exception", e)
-            break
+            time.sleep(30)
+            continue
         
         
 def response_timeline(match_ID):      
@@ -49,15 +53,19 @@ def response_timeline(match_ID):
         except (IncompleteRead, ChunkedEncodingError, ConnectionError) as e:
             print('IncompleteRead, ChunkedEncodingError, ConnectionError')
             print(e)
-            break               
+            print("IncompleteRead")
+            time.sleep(30)
+            continue                
 
         except HTTPError as e:
             print("HTTTPError", e)
-            break
+            time.sleep(30)
+            continue
             
         except Exception as e:
             print("Exception", e)
-            break
+            time.sleep(30)
+            continue
         
         
 def response_puuids(rank, tier, page):      
@@ -77,15 +85,19 @@ def response_puuids(rank, tier, page):
         except (IncompleteRead, ChunkedEncodingError, ConnectionError) as e:
             print('IncompleteRead, ChunkedEncodingError, ConnectionError')
             print(e)
-            break               
+            print("IncompleteRead")
+            time.sleep(30)
+            continue               
 
         except HTTPError as e:
             print("HTTTPError", e)
-            break
+            time.sleep(30)
+            continue
             
         except Exception as e:
             print("Exception", e)
-            break
+            time.sleep(30)
+            continue
         
         
 def response_challengers():      
@@ -105,15 +117,19 @@ def response_challengers():
         except (IncompleteRead, ChunkedEncodingError, ConnectionError) as e:
             print('IncompleteRead, ChunkedEncodingError, ConnectionError')
             print(e)
-            break               
+            print("IncompleteRead")
+            time.sleep(30)
+            continue                
 
         except HTTPError as e:
             print("HTTTPError", e)
-            break
+            time.sleep(30)
+            continue
             
         except Exception as e:
             print("Exception", e)
-            break                        
+            time.sleep(30)
+            continue                       
         
 
 def response_grandmasters():      
@@ -133,15 +149,19 @@ def response_grandmasters():
         except (IncompleteRead, ChunkedEncodingError, ConnectionError) as e:
             print('IncompleteRead, ChunkedEncodingError, ConnectionError')
             print(e)
-            break               
+            print("IncompleteRead")
+            time.sleep(30)
+            continue                
 
         except HTTPError as e:
             print("HTTTPError", e)
-            break
+            time.sleep(30)
+            continue
             
         except Exception as e:
             print("Exception", e)
-            break   
+            time.sleep(30)
+            continue  
         
         
 def response_masters():      
@@ -161,15 +181,19 @@ def response_masters():
         except (IncompleteRead, ChunkedEncodingError, ConnectionError) as e:
             print('IncompleteRead, ChunkedEncodingError, ConnectionError')
             print(e)
-            break               
+            print("IncompleteRead")
+            time.sleep(30)
+            continue               
 
         except HTTPError as e:
             print("HTTTPError", e)
-            break
+            time.sleep(30)
+            continue
             
         except Exception as e:
             print("Exception", e)
-            break   
+            time.sleep(30)
+            continue  
         
 
 def response_matches(user_id, match_count):
@@ -189,15 +213,19 @@ def response_matches(user_id, match_count):
         except (IncompleteRead, ChunkedEncodingError, ConnectionError) as e:
             print('IncompleteRead, ChunkedEncodingError, ConnectionError')
             print(e)
-            break               
+            print("IncompleteRead")
+            time.sleep(30)
+            continue                 
 
         except HTTPError as e:
             print("HTTTPError", e)
-            break
+            time.sleep(30)
+            continue
             
         except Exception as e:
             print("Exception", e)
-            break
+            time.sleep(30)
+            continue
         
         
 def response_user(user):
@@ -217,14 +245,18 @@ def response_user(user):
         except (IncompleteRead, ChunkedEncodingError, ConnectionError) as e:
             print('IncompleteRead, ChunkedEncodingError, ConnectionError')
             print(e)
-                          
+            print("IncompleteRead")
+            time.sleep(30)
+            continue                
 
         except HTTPError as e:
             print("HTTTPError", e)
-            break
+            time.sleep(30)
+            continue
             
         except Exception as e:
             print("Exception", e)
-            break        
+            time.sleep(30)
+            continue       
         
         
