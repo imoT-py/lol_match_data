@@ -10,7 +10,7 @@ from responses import response_masters
 
 def get_puuids():
 
-    ranks = ["IRON", "BRONZE", "SILVER", "GOLD", "PLATINUM", "EMERALD", "DIAMOND"]
+    ranks = ["BRONZE", "SILVER", "GOLD", "PLATINUM", "EMERALD", "DIAMOND"]
     tiers = ["I", "II", "III", "IV"]
     list_puuids = []
 
@@ -27,6 +27,8 @@ def get_puuids():
                     inner_data = user['puuid']
                     list_puuids.append(inner_data)
             time.sleep(2)
+            
+            print(len(list_puuids))
             return list_puuids, rank
         
 
